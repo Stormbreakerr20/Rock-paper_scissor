@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissors</title>
+    <style>
+        body{
+            background-image: radial-gradient(red, green 35%, blue) ;  
+    
+
+
+        }
+        .total{
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 50px;
+            width: 600px;
+            height: 600px;
+            margin: 60px auto ;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+        .game{
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        .total::before{
+            background: url('back2.jpg') no-repeat center center/cover;
+            content: "";
+            position: absolute;
+
+            border-radius: 50px;
+            border: 10px double black;
+            width: 75%;
+            height: 75%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        .box{
+            font-size: 100px;
+            border: 1px solid red;
+            border-radius: 20px;
+            margin: 0 10px;
+            box-shadow: 5px 5px rgb(59, 58, 58);
+
+        }
+        .box:hover{
+            background-color: aqua;
+        }
+        .box:active{
+            background-color: aquamarine;
+        }
+            
+
+        #clear{
+            text-align: center;
+            margin-top: 20px;
+        }
+        #print{
+            font-size: 30px;
+            text-align: center;
+        }
+
+        @media (max-width:1200px ) and (min-width:500px){
+            .total{
+            display: flex;
+            flex-direction: column;
+            border-radius: 50px;
+            width: 380px;
+            height: 380px;
+            margin: 500px auto ;
+
+            align-items: center;
+            justify-content: center;
+            }
+            .box{
+            font-size: 65px;
+            border: 1px solid red;
+            border-radius: 20px;
+            margin-bottom: 5px;
+            box-shadow: 5px 5px rgb(59, 58, 58);
+
+            }
+            #print{
+            font-size: 15px;
+            text-align: center;
+            border: 10px solid red;
+            }
+            .game{
+            display: flex;
+            justify-content: center;
+            margin: 10px 20px;
+            }
+            .total::before{
+            background: url('back2.jpg') no-repeat center center/cover;
+            content: "";
+            position: absolute;
+
+            border-radius: 50px;
+            border: 10px double black;
+            width: 75%;
+            height: 75%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        }
+        @media (max-width:500px ){
+            .total{
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 50px;
+            width: 300px;
+            height: 350px;
+            margin: 250px auto ;
+
+            align-items: center;
+            justify-content: center;
+
+            }
+            .box{
+            font-size: 45px;
+            border: 1px solid red;
+            border-radius: 20px;
+            margin-bottom: 5px;
+            box-shadow: 5px 5px rgb(59, 58, 58);
+
+            }
+            #print{
+            font-size: 18px;
+            text-align: center;
+            }
+            .game{
+            display: flex;
+            justify-content: center;
+            margin: 10px 20px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="total">
+        <h1>Play The Game</h1>
+
+        <div class="game">
+            <button class="box" id="rock">✊</button>
+            <button class="box" id="paper">🤚</button>
+            <button class="box" id="scissor">✌</button>
+        </div>
+        <div id="print"></div>
+        <button class="box" id="clear">&#128721;</button>
+    </div>
+
+    <script>
+        let score=0
+        let computer_choice=()=>{
+            let x= Math.floor(Math.random()*3)
+            return x
+        }
+
+        const rock=document.getElementById("rock")
+        const paper=document.getElementById("paper")
+        const scissor=document.getElementById("scissor")
+        const clear=document.getElementById("clear")
+        let score_print= document.getElementById("print")
+        
+        
+        const output={0:'✊',1:'🤚',2:'✌'}
+        rock.onclick=()=>{
+            let y=computer_choice()        
+            if(y==2){
+                score++
+                score_print.innerText=`You won\nYour choice: ${output[0]} Computer Choice: ${output[y]}\nScore: ${score}`
+            }
+            else if(y==0){
+                score_print.innerText=`Tied\nYour choice: ${output[0]} Computer Choice: ${output[y]}\nScore: ${score}`
+
+            }
+            else{
+                score_print.innerText=`You Lost\nYour choice: ${output[0]} Computer Choice: ${output[y]}\nScore: 0`
+                score=0
+                return
+            }
+        }
+        paper.onclick=()=>{
+            let y=computer_choice()    
+            if(y==0){
+                score++
+                score_print.innerText=`You wony\nYour choice:${output[1]} Computer Choice: ${output[y]}\nScore: ${score}`
+            }
+            else if(y==1){
+                score_print.innerText=`Tied\nYour choice:${output[1]} Computer Choice: ${output[y]}\nScore: ${score}`
+
+            }
+            else{
+                score_print.innerText=`You Lost\nYour choice:${output[1]} Computer Choice:${output[y]}\nScore: 0`
+                score=0
+                return
+            }
+        }
+        scissor.onclick=()=>{
+            let y=computer_choice()        
+            if(y==1){
+                score++
+                score_print.innerText=`You won\nYour choice:${output[2]} Computer Choice:${output[y]}\nScore: ${score}`
+            }
+            else if(y==2){
+                score_print.innerText=`Tied\nYour choice:${output[2]} Computer Choice:${output[y]}\nScore: ${score}`
+
+            }
+            else{
+                score_print.innerText=`You Lost\nYour choice:${output[2]} Computer Choice:${output[y]}\nScore: 0`
+                score=0
+                return
+            }
+        }
+        clear.onclick=()=>{
+            score_print.innerText=""
+            score=0
+        }
+
+    </script>
+
+
+    
+</body>
+</html>
